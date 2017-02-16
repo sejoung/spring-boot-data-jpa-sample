@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import kr.co.killers.sample.domain.User;
+import kr.co.killers.sample.domain.Account;
 import kr.co.killers.sample.repositories.UserRepository;
 import kr.co.killers.sample.security.UserDetailsImpl;
 
@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userid) throws UsernameNotFoundException {
-		User account = userRepository.findByUserid(userid);
+		Account account = userRepository.findByUserid(userid);
 		if (account == null) {
 	            throw new UsernameNotFoundException(userid);
 	    }

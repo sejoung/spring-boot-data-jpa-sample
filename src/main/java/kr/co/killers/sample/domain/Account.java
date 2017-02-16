@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity(name = "TB_USER")
-public class User {
+public class Account {
 
 	@Id
 	@GeneratedValue

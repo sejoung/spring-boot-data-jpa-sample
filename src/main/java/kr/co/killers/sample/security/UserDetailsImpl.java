@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import kr.co.killers.sample.domain.Account;
+
 public class UserDetailsImpl extends User {
 
 	private static final long serialVersionUID = 1L;
@@ -22,14 +24,14 @@ public class UserDetailsImpl extends User {
 		this.nick = nick;
 	}
 
-	public UserDetailsImpl(kr.co.killers.sample.domain.User user) {
-		super(user.getUserid(), user.getPassword(), authorities(user));
-		this.nick = user.getNick(); 
+	public UserDetailsImpl(Account account) {
+		super(account.getUserid(), account.getPassword(), authorities(account));
+		this.nick = account.getNick(); 
 	}
 
-	private static Collection<? extends GrantedAuthority> authorities(kr.co.killers.sample.domain.User user) {
+	private static Collection<? extends GrantedAuthority> authorities(Account account) {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(user.getRole()));
+		authorities.add(new SimpleGrantedAuthority(account.getRole()));
 		return authorities;
 	}
 

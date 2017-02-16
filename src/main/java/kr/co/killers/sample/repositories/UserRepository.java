@@ -2,8 +2,8 @@ package kr.co.killers.sample.repositories;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import kr.co.killers.sample.domain.User;
+import kr.co.killers.sample.domain.Account;
 
-public interface UserRepository extends PagingAndSortingRepository<User, Long>{
-	public User findByUserid(String userid);
+public interface UserRepository extends PagingAndSortingRepository<Account, Long>{
+	public Account findByUserid(String userid);
 }
