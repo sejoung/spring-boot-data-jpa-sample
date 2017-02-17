@@ -20,9 +20,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.killers.sample.security.UserDetailsImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -41,8 +43,9 @@ public class WelComeController {
 	
 	
 	@RequestMapping("/admin")
-	public String admin(Map<String, Object> model,Locale locale) {
-		log.info("Welcome home! The client locale is {}.", locale);
+	public String admin(Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		log.debug("admin "+userDetails.getUsername());
 		return "admin";
 	}
 	

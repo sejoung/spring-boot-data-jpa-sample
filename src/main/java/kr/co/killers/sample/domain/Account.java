@@ -2,9 +2,12 @@ package kr.co.killers.sample.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import kr.co.killers.sample.constants.Role;
 import lombok.Data;
 
 @Data
@@ -21,8 +24,9 @@ public class Account {
 	@Column(length = 50, nullable = false)
 	private String password;
 
-	@Column(length = 50, nullable = false)
-	private String role;
+	@Column(name = "role", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	@Column(length = 50, nullable = false)
 	private String nick;
