@@ -10,14 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
 @Entity(name = "TB_BOARD")
-public class Board  extends Common{
+public class Board {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,8 +38,30 @@ public class Board  extends Common{
 	@OneToMany(orphanRemoval = true, mappedBy = "board", fetch = FetchType.LAZY )
 	private List<Comment> comments;
 	
+	@Column(nullable = false)
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime createDate;
+
+	@Column(nullable = false)
+	private String createUser;
+	
+	@Column(nullable = false)
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime updateDate;
+
+	@Column(nullable = false)
+	private String updateUser;
+	
 	@PrePersist
 	public void prePersist() {
+		DateTime now = DateTime.now();
+		this.setCreateDate(now);
+		this.setUpdateDate(now);
 		this.setHit(0);
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		this.setUpdateDate(DateTime.now());
 	}
 }

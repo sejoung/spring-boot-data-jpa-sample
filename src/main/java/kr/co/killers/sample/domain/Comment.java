@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Entity(name="TB_COMMENT")
-public class Comment extends Common {
+public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,4 +32,30 @@ public class Comment extends Common {
 	@JsonIgnore
 	@ManyToOne
 	private Board board;
+	
+	@Column(nullable = false)
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime createDate;
+
+	@Column(nullable = false)
+	private String createUser;
+	
+	@Column(nullable = false)
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime updateDate;
+
+	@Column(nullable = false)
+	private String updateUser;
+	
+	@PrePersist
+	public void prePersist() {
+		DateTime now = DateTime.now();
+		this.setCreateDate(now);
+		this.setUpdateDate(now);
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		this.setUpdateDate(DateTime.now());
+	}
 }
