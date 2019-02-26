@@ -1,5 +1,6 @@
 package kr.co.killers.sample.service.impl;
 
+import kr.co.killers.sample.param.BoardDetailParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,13 +40,19 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Board detail(BoardParam boardParam) {
-		Optional<Board> bdo = boardRepository.findById(boardParam.getBoardId());
+	public Board detail(BoardDetailParam BoardDetailParam) {
+		Optional<Board> bdo = boardRepository.findById(BoardDetailParam.getBoardId());
 		Board result = null;
 
 		if(bdo.isPresent()){
 			Board bd = bdo.get();
 			bd.setHit(bd.getHit() + 1);
+			Comment c = new Comment();
+
+			c.setBoard(bd);
+			c.setContents("asdsadsd");
+
+			bd.addComments(c);
 			result = boardRepository.save(bd);
 		}
 		return result;

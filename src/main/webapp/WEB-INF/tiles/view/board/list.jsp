@@ -23,7 +23,7 @@
 			<c:forEach items="${datas.content}" var="data" varStatus="status">
 				<tr>
 					<td>${datas.totalElements-(datas.number)*10-status.index}</td>
-					<td><a href="noticeDetail.do?id=${data.id}">${data.title}</a></td>
+					<td><a href="/board/detail.do?boardId=${data.id}">${data.title}</a></td>
 					<td>${data.hit}</td>
 					<td>${fn:substring(data.createDate,0,10)}</td>
 					<td>${fn:substring(data.updateDate,0,10)}</td>

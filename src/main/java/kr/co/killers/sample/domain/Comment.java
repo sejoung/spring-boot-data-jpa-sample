@@ -1,13 +1,16 @@
 package kr.co.killers.sample.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
+
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper=false)
 @Entity(name="TB_COMMENT")
 public class Comment {

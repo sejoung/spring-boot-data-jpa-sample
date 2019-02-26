@@ -1,5 +1,6 @@
 package kr.co.killers.sample.service;
 
+import kr.co.killers.sample.param.BoardDetailParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,7 +12,7 @@ public interface BoardService {
 
 	public Board save(BoardParam boardParam);
 
-	public Board detail(BoardParam boardParam);
+	public Board detail(BoardDetailParam boardDetailParam);
 
 	public void delete(BoardParam boardParam);
 

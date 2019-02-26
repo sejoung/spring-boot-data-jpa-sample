@@ -5,7 +5,7 @@
 <html>
 <head>
 <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-<link href="/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/static/css/bootstrap.min.css" rel="stylesheet" />
 <script type="text/javascript">
 function goPage(page){
 	

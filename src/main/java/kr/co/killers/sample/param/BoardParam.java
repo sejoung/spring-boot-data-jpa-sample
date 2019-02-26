@@ -1,11 +1,13 @@
 package kr.co.killers.sample.param;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.Data;
-
-@Data
+@Getter
+@Setter
 public class BoardParam {
 
 	private Long boardId;

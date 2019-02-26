@@ -1,16 +1,14 @@
 package kr.co.killers.sample.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import kr.co.killers.sample.constants.Role;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import javax.persistence.*;
+
+
+@Getter
+@Setter
 @Entity(name = "TB_USER")
 public class Account {
 

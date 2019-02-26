@@ -21,6 +21,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import kr.co.killers.sample.param.BoardDetailParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,7 +47,7 @@ public class BoardController {
 	
 	@RequestMapping("/list.do")
 	public String list(Map<String, Object> model, @RequestParam(name = "page", defaultValue = "0", required = false) int page, @RequestParam(name = "pagesize", defaultValue = "10", required = false) int pagesize) {
-		Page<Board> datas = boardService.list(new PageRequest(page, pagesize, Direction.DESC, "id"));
+		Page<Board> datas = boardService.list(PageRequest.of(page, pagesize, Direction.DESC, "id"));
 		model.put("datas", datas);
 		return "board.list";
 	}
@@ -65,12 +66,12 @@ public class BoardController {
 	}
 
 	@RequestMapping("/detail.do")
-	public String detail(Map<String, Object> model, @Valid BoardParam boardParam) {
-		Board bd = boardService.detail(boardParam);
+	public String detail(Map<String, Object> model, @Valid BoardDetailParam boardDetailParam) {
+		Board bd = boardService.detail(boardDetailParam);
 		List<Comment> cList = bd.getComments();
 		model.put("bd", bd);
 		model.put("coList", cList);
-		return "board.detail";
+		return "board.boardDetail";
 	}
 
 	@RequestMapping("/delete.do")
