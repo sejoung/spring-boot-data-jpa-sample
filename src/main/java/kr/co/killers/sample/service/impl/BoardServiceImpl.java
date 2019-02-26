@@ -14,6 +14,9 @@ import kr.co.killers.sample.repositories.BoardRepository;
 import kr.co.killers.sample.repositories.CommentRepository;
 import kr.co.killers.sample.service.BoardService;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
+
 @Service("boardService")
 @Transactional
 public class BoardServiceImpl implements BoardService {
@@ -37,15 +40,20 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board detail(BoardParam boardParam) {
-		Board bd = boardRepository.findOne(boardParam.getBoardId());
-		bd.setHit(bd.getHit() + 1);
-		boardRepository.save(bd);
-		return bd;
+		Optional<Board> bdo = boardRepository.findById(boardParam.getBoardId());
+		Board result = null;
+
+		if(bdo.isPresent()){
+			Board bd = bdo.get();
+			bd.setHit(bd.getHit() + 1);
+			result = boardRepository.save(bd);
+		}
+		return result;
 	}
 
 	@Override
 	public void delete(BoardParam boardParam) {
-		boardRepository.delete(boardParam.getBoardId());
+		boardRepository.deleteById(boardParam.getBoardId());
 	}
 
 	@Override
@@ -55,7 +63,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board update(BoardParam boardParam) {
-		Board bd = boardRepository.findOne(boardParam.getBoardId());
+		Optional<Board> bdo = boardRepository.findById(boardParam.getBoardId());
+		Board bd = bdo.orElse(new Board());
 		bd.setTitle(boardParam.getBoardTitle());
 		bd.setContents(boardParam.getBoardContents());
 		bd.setUpdateUser(boardParam.getUser());
@@ -64,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board commentSave(CommentParam commentParam) {
-		Board bd = boardRepository.findOne(commentParam.getBoardId());
+		Board bd = boardRepository.findById(commentParam.getBoardId()).orElseThrow(()-> new EntityNotFoundException());
 		Comment co = new Comment();
 		co.setCreateUser(commentParam.getUser());
 		co.setUpdateUser(commentParam.getUser());
@@ -76,7 +85,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void commentDelete(CommentParam commentParam) {
-		commentRepository.delete(commentParam.getCommentId());
+		commentRepository.deleteById(commentParam.getCommentId());
 	}
 	
 }
