@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,8 +28,8 @@ public class Board {
 	private int hit;
 	
 	@OneToMany(orphanRemoval = true, mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-	private List<Comment> comments;
-	
+	private List<Comment> comments = new ArrayList<>();
+
 	@Column(nullable = true)
 	private LocalDateTime createDate;
 

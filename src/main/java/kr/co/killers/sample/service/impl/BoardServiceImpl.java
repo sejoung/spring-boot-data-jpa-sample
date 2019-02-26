@@ -49,12 +49,6 @@ public class BoardServiceImpl implements BoardService {
 		if(bdo.isPresent()){
 			Board bd = bdo.get();
 			bd.setHit(bd.getHit() + 1);
-			Comment c = new Comment();
-log.info("메롱롱롱롱");
-			c.setBoard(bd);
-			c.setContents("asdsadsd");
-
-			bd.addComments(c);
 			result = boardRepository.save(bd);
 		}
 		return result;

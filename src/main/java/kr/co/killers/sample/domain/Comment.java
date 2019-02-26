@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode(callSuper=false)
 @Entity(name="TB_COMMENT")
 public class Comment {
