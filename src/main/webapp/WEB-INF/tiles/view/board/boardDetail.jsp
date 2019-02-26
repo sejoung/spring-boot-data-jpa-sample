@@ -22,9 +22,6 @@
 		<div class="row">
 
 			<div class="col-lg-12">
-				<img src="/img/page_19_01.jpg"> <br />
-				<br />
-				<br />
 				<table class="table table-bordered">
 					<colgroup>
 						<col width="60%" />
@@ -39,18 +36,15 @@
 					</tr>
 					<tr>
 						<td>${bd.title}</td>
-						<td>${fn:substring(bd.createDate,0,10)}</td>
-						<td>${fn:substring(bd.updateDate,0,10)}</td>
+						<td>${bd.createDate}</td>
+						<td>${bd.updateDate}</td>
 					</tr>
 					<tr>
 						<td colspan="3">${bd.contents}</td>
 					</tr>
 
 				</table>
-				<c:if test="${bd.writer eq 'admin' }">
-					<input type="button" class="btn btn-primary" value="삭제"
-						id="deleteNotice">
-				</c:if>
+
 				<input type="button" class="btn btn-primary" value="목록으로"
 					id="noticeList"> <input type="button"
 					class="btn btn-primary" value="수정" id="noticeUp"> <input
@@ -58,7 +52,7 @@
 				<input type="hidden" id="delId" value="${bd.id}"> <br />
 				<br />
 				<div class="col-lg-12" id="replyArea">
-					<form method="post" action="replyAdd.do" id="replyAddForm">
+					<form method="post" action="CommentAdd.do" id="replyAddForm">
 						<input type="hidden" id="boardId" name="boardId" value="${bd.id}">
 
 						<table class="table table-striped" style="display: block">
@@ -87,15 +81,6 @@
 										<td>${cList.contents}</td>
 										<td>${fn:substring(cList.createDate,0,10)}</td>
 										<td>${fn:substring(cList.updateDate,0,10)}</td>
-										<c:if test="${cList.writer eq 'admin'}">
-											<td><input type="button" class="btn btn-primary delete"
-												id="${cList.id}" value="삭제"
-												onClick="javascript:location.href='/homepage/notice/noticeReplyDelete.do?replyId=${cList.id}&boardId=${bd.id}'"></td>
-										</c:if>
-										<c:if test="${cList.writer ne 'admin'}">
-											<td></td>
-										</c:if>
-
 									</tr>
 								</c:forEach>
 							</c:if>

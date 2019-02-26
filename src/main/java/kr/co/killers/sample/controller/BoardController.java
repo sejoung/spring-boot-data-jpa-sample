@@ -83,21 +83,21 @@ public class BoardController {
 	@RequestMapping("/boardCommentDelete.do")
 	public String boardCommentDelete(Map<String, Object> model,@Valid CommentParam commentParam)	{
 		boardService.commentDelete(commentParam);
-		return "redirect:/boardDetail.do?id="+commentParam.getBoardId();
+		return "redirect:/board/detail.do?boardId="+commentParam.getBoardId();
 	}
 
 	@RequestMapping("/boardUpdate.do")
 	public String boardUpdate(Map<String, Object> model, @Valid BoardParam boardParam) {
 		Board bd = boardService.update(boardParam);
 		model.put("bd", bd);
-		return "board.boardDetail";
+		return "board.detail";
 	}
 
 	@RequestMapping("/CommentAdd.do")
 	public String boardCommentAdd(Map<String, Object> model, @Valid CommentParam CommentAddParam) {
 		boardService.commentSave(CommentAddParam);
 		
-		return "redirect:/boardDetail.do?id=" + CommentAddParam.getBoardId();
+		return "redirect:/board/detail.do?boardId=" + CommentAddParam.getBoardId();
 	}
 
 }

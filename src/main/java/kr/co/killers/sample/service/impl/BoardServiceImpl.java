@@ -1,6 +1,7 @@
 package kr.co.killers.sample.service.impl;
 
 import kr.co.killers.sample.param.BoardDetailParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import kr.co.killers.sample.service.BoardService;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
+@Slf4j
 @Service("boardService")
 @Transactional
 public class BoardServiceImpl implements BoardService {
@@ -48,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
 			Board bd = bdo.get();
 			bd.setHit(bd.getHit() + 1);
 			Comment c = new Comment();
-
+log.info("메롱롱롱롱");
 			c.setBoard(bd);
 			c.setContents("asdsadsd");
 

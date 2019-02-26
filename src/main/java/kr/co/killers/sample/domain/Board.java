@@ -26,7 +26,7 @@ public class Board {
 	@Column(nullable = false)
 	private int hit;
 	
-	@OneToMany(orphanRemoval = true, mappedBy = "board", fetch = FetchType.LAZY )
+	@OneToMany(orphanRemoval = true, mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
 	private List<Comment> comments;
 	
 	@Column(nullable = true)
