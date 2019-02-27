@@ -38,7 +38,7 @@ public class RepositoryTest {
         Comment c = new Comment();
         c.setContents("aaa");
         b.addComments(c);
-        c.setBoard(b);
+        
         commentRepository.save(c);
 
 

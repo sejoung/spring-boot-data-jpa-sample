@@ -56,6 +56,7 @@ public class Board {
 	}
 
 	public void addComments(Comment comment){
+		comment.setBoard(this);
 		this.comments.add(comment);
 	}
 }
